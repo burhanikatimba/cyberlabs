@@ -1,17 +1,13 @@
 <?php
-// Database configuration
-$host = 'localhost';      // Your database host (usually localhost)
-$username = 'root';       // Your MySQL username (default is root for XAMPP)
-$password = '';           // Your MySQL password (default is empty for XAMPP)
-$database = 'nasridb';    // Your database name
+$host = 'localhost';
+$dbname = 'nasridb';
+$username = 'root';
+$password = '';
 
-// Create a connection to the database
-$conn = new mysqli($host, $username, $password, $database);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
 }
-
-// Connection successful
 ?>
